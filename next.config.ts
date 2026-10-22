@@ -27,8 +27,8 @@ const nextConfig: NextConfig = {
     },
   },
   experimental: {
-    // envio de várias fotos de produto de uma vez pelo painel
-    serverActions: { bodySizeLimit: "60mb" },
+    // Compatível com o limite de corpo das Vercel Functions (4,5 MB).
+    serverActions: { bodySizeLimit: "4mb" },
   },
   async headers() {
     return [
