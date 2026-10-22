@@ -23,8 +23,8 @@ export function ImageManager({ productId, images, colors }: { productId: string;
       <form action={async (fd) => { await action(fd); setPreviews([]); }} className="grid gap-4 border border-dashed border-line p-4">
         <FormMessage state={state} />
         <div className="field">
-          <label htmlFor="files">Escolher foto (até 4 MB)</label>
-          <input id="files" name="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/heic,image/heif" required
+          <label htmlFor="files">Escolher fotos</label>
+          <input id="files" name="files" type="file" multiple accept="image/jpeg,image/png,image/webp,image/avif,image/heic,image/heif" required
             className="text-sm file:mr-3 file:border file:border-ink file:bg-white file:px-3 file:py-2 file:font-medium"
             onChange={(e) => setPreviews([...(e.target.files ?? [])].slice(0, 20).map((f) => URL.createObjectURL(f)))} />
         </div>
