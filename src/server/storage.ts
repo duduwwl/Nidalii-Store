@@ -5,7 +5,9 @@ import { mkdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-const MAX_BYTES = 15 * 1024 * 1024;
+// Mantém o upload abaixo do limite de 4,5 MB das Vercel Functions,
+// incluindo a pequena sobrecarga do formulário multipart.
+const MAX_BYTES = 4_000_000;
 const MAX_EDGE = 2400; // lado maior da foto guardada
 
 export type StoredImage = { url: string; width: number; height: number };
@@ -32,7 +34,7 @@ export function uploadPath(...parts: string[]) {
  */
 export async function storeImage(file: File, folder: string): Promise<StoredImage> {
   if (file.size === 0) throw new UploadError("Arquivo vazio.");
-  if (file.size > MAX_BYTES) throw new UploadError("A foto passa de 15 MB.");
+  if (file.size > MAX_BYTES) throw new UploadError("A foto passa de 4 MB.");
   const input = Buffer.from(await file.arrayBuffer());
 
   let meta;
