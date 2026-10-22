@@ -8,7 +8,7 @@ O site precisa de um servidor Node.js, um banco PostgreSQL e uma pasta persisten
 |---|---|---|
 | **VPS** (Hetzner, DigitalOcean, Contabo, Magalu Cloud) com Node + Postgres | Recomendado. Custo fixo baixo, tudo num lugar | As fotos ficam no disco (`STORAGE_DIR`). Use Nginx + PM2 ou Docker |
 | **Railway / Render** com volume persistente | Menos manutenção | Monte um volume e aponte `STORAGE_DIR` para ele |
-| **Vercel + Neon/Supabase** | Escala automática | O disco não é persistente: antes, troque `src/server/storage.ts` para gravar num bucket (Vercel Blob, S3, R2) |
+| **Vercel + Neon/Supabase + Vercel Blob** | Escala automática | Compatível com o projeto: conecte o banco e o Blob Store antes da primeira publicação |
 
 Passos em qualquer servidor:
 
@@ -24,6 +24,8 @@ npm start          # porta 3000; coloque atrás de HTTPS
 ## 2. Variáveis de ambiente
 
 Veja `.env.example`. Obrigatórias: `DATABASE_URL`, `NEXT_PUBLIC_SITE_URL` (com https), `ORDER_LINK_SECRET` e `CRON_SECRET`. Gere os dois segredos com `openssl rand -base64 32`.
+
+Na Vercel, conecte um banco PostgreSQL pelo Marketplace (Neon ou Supabase) e um Vercel Blob Store. O projeto usa `DATABASE_URL` para o Prisma e detecta automaticamente `BLOB_READ_WRITE_TOKEN` para manter as fotos persistentes.
 
 ## 3. Mercado Pago (Pix, crédito e débito)
 
