@@ -1,0 +1,76 @@
+/* Nidalii Store — tokens (Tailwind v4: importar após `@import "tailwindcss";`) */
+
+@theme {
+  --color-ink: #0a0a0a;
+  --color-paper: #f8f7f5;
+  --color-white: #ffffff;
+  --color-graphite: #55524e;
+  --color-line: #dddad5;
+  --color-wine: #7a1e2e;
+
+  --font-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 21px;
+  --text-xl: 28px;
+  --text-2xl: clamp(36px, 5vw, 50px);
+  --text-display: clamp(56px, 11vw, 168px);
+
+  --radius-control: 2px;
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --container-max: 1600px;
+}
+
+:root {
+  --gutter: 16px;
+  --margin: 16px;
+  --section-gap: 64px;
+  color-scheme: light;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 24px;
+    --margin: 40px;
+    --section-gap: 128px;
+  }
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.price {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
